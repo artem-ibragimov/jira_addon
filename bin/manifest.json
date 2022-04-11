@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "author": "artem.ibragimov",
-    "name": "Netflix subs",
-    "description": "Adaptive subs for Netflix",
+    "name": "Jira Add-on",
+    "description": "Jira Extension",
     "version": "0.0.1",
     "permissions": [
         "webRequest",
@@ -24,7 +24,7 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.netflix.com/*"
+                "https://cryptopayoffice.atlassian.net/*"
             ],
             "all_frames": true,
             "js": [

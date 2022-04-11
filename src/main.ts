@@ -1,20 +1,17 @@
-import { PlayerComponent } from 'src/components/PlayerCmp';
-import { UserActions } from 'src/components/UserActions';
-import { PlayerController } from 'src/core/PlayerCtrl';
+chrome.runtime.onMessage.addListener((issues, _sender, sendResponse) => {
+   updateIssues(JSON.parse(issues));
+});
 
-window.onload = () => {
-   /** hide original captions */
-   document.head.innerHTML += '<style>.player-timedtext { visibility: hidden; } </style>';
-   const rewind = () => { document.querySelector<HTMLButtonElement>('.button-nfplayerBackTen')?.click(); };
-   const player_ctrl = new PlayerController(rewind);
-   const player_cmp = new PlayerComponent('div.VideoContainer video');
-   player_cmp.on('timeupdate', player_ctrl.timeupdate);
-   player_ctrl.on('state_change', player_cmp.state_change);
+function updateIssues(issues: Record<string, { trackingStatistic: { statFieldValue: { text: string; }; }; }>) {
+   const containter = document.querySelector('.ghx-issues');
+   if (!containter) { return; }
 
-   const user_actions = new UserActions();
-   user_actions.on('stepback', player_ctrl.stepback);
-   window.addEventListener('popstate', () => {
-      player_cmp.reset();
-      player_ctrl.reset();
+   Array.from(containter.children).forEach((el) => {
+      const c = el.querySelector('span.ghx-items-container');
+      const id = el.getAttribute('data-issue-key');
+      if (!c || !id) { return; }
+      const trackingStatistic = document.createElement('span');
+      trackingStatistic.innerText = issues[id].trackingStatistic.statFieldValue.text;
+      c.insertBefore(trackingStatistic, c.firstChild);
    });
-};
+}
