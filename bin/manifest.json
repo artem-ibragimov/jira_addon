@@ -1,12 +1,11 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "author": "artem.ibragimov",
     "name": "Jira Add-on",
     "description": "Jira Extension",
     "version": "0.0.1",
-    "permissions": [
-        "webRequest",
-        "<all_urls>"
+    "host_permissions": [
+        "*://*.atlassian.net/*"
     ],
     "icons": {
         "16": "./asset/i16.png",
@@ -15,16 +14,10 @@
         "128": "./asset/i128.png",
         "225": "./asset/i225.png"
     },
-    "background": {
-        "scripts": [
-            "background.js"
-        ],
-        "persistent": true
-    },
     "content_scripts": [
         {
             "matches": [
-                "https://cryptopayoffice.atlassian.net/*"
+                "https://*.atlassian.net/*"
             ],
             "all_frames": true,
             "js": [

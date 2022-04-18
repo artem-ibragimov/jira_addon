@@ -7,7 +7,6 @@
     "quicklink-chrome": "default_data.js"
   },
   "scripts": {
-    "build": "npm run build:dev && npm run build:prod",
     "build:prod": "rollup --config rollup.min.config.js",
     "build:dev": "rollup --config",
     "watch:dev": "rollup --config -w"
