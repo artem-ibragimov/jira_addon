@@ -1,3 +1,5 @@
+import { TimeStatistics } from './DOM';
+
 window.addEventListener('load', () => {
    getRapidView()
       .then(makeRequest)
@@ -58,14 +60,7 @@ function updateIssues(issues: Issues) {
          totalTime[name] = Math.round((totalTime[name] || 0 + parseFloat(time || '0')) * 100) / 100;
       });
 
-      const pie = document.createElement('a');
-      const data = document.createElement('pre');
-      containter.insertBefore(data, pie);
-      pie.innerText = '📊';
-      pie.onclick = () => {
-         data.innerText = JSON.stringify(totalTime, null, 2);
-      };
-      containter.insertBefore(pie, containter.firstChild);
+      new TimeStatistics(containter, totalTime)
       console.info(totalTime);
    });
 }
